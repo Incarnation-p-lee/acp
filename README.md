@@ -1,2 +1,2 @@
 # acp
-Write and Learn, talk is checp, show me ur code.
+Write and Learn, talk is cheap, show me ur code.
