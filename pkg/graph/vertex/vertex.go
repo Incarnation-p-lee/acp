@@ -1,4 +1,4 @@
-package types
+package vertex
 
 import "container/list"
 
@@ -8,5 +8,5 @@ type Vertex struct {
 	SuccessorEdges list.List
 	PrecursorEdges list.List
 	Value          interface{}
-	Status         GraphStatus
+	// Status         GraphStatus
 }
