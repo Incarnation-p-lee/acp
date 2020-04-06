@@ -17,7 +17,8 @@ help:
 	@echo
 
 build: $(SRC_FILES)
-	gofmt -w $(SRC_FILES) && go build $^
+	gofmt -w $^
+	go build $^
 
 test: $(SRC_FILES)
 	go test -v -coverprofile $$$$.cover.out -covermode=atomic $^
