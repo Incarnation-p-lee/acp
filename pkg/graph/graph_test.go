@@ -10,6 +10,7 @@ import (
 func TestGraphNew(t *testing.T) {
 	g := New()
 
+	assert.NotNil(t, g)
 	assert.NotNil(t, g.Vertexes)
 	assert.NotNil(t, g.Edges)
 	assert.NotNil(t, g.Attributes)
