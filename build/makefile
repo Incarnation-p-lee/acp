@@ -1,8 +1,8 @@
-SHELL                            :=/bin/bash
-BINARY_NAME                      :=acp
-SRC_FILES                        :=$(shell find . -type f -name '*.go' -print)
-FAKE_FILES                       :=$(subst .go,.fake,$(SRC_FILES))
-FAKE_TEST_FILES                  :=$(subst .go,.fake_test,$(SRC_FILES))
+SHELL                :=/bin/bash
+BINARY_NAME          :=acp
+PACKAGES             :=
+SRC_FILES            :=$(shell find . -type f -name '*.go' -print)
+PACKAGES_STRIP       =$(strip $(PACKAGES))
 
 .PHONY: help test build
 
@@ -18,11 +18,11 @@ help:
 	@echo "	test:    run test code."
 	@echo
 
-build: $(FAKE_FILES)
-$(FAKE_FILES):%.fake:%.go
-	gofmt -w $<
-	go build $<
+build:
+	@gofmt -w $(SRC_FILES)
+	go build $(PACKAGES_STRIP)
 
-test: $(FAKE_TEST_FILES)
-$(FAKE_TEST_FILES):%.fake_test:%.go
-	go test -v -coverprofile $$$$.cover.out -covermode=atomic $<
+test: 
+	@gofmt -w $(SRC_FILES)
+	go test -v -coverprofile $$$$.cover.out -covermode=atomic $(PACKAGES_STRIP)
+	@cat *.cover.out > cover.out && rm *.cover.out
