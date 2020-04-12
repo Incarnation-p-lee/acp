@@ -1,6 +1,13 @@
 package vertex
 
-import "container/list"
+import (
+	"container/list"
+)
+
+// Status indicate the status of vertex
+type Status struct {
+	Visitd bool
+}
 
 // Vertex indicates the structure definition for vertex
 type Vertex struct {
@@ -8,5 +15,5 @@ type Vertex struct {
 	SuccessorEdges list.List
 	PrecursorEdges list.List
 	Value          interface{}
-	// Status         GraphStatus
+	Status         Status
 }
