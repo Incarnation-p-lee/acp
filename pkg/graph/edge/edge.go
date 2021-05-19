@@ -19,13 +19,18 @@ type Edge struct {
 	Status    Status
 }
 
-// New create one edge and return the pointer to it
-func New(cost int64) *Edge {
-	e := new(Edge)
+// New create one edge and initialize it
+func New() *Edge {
+	return new(Edge).Init()
+}
 
-	e.ID = uuid.New().String()
-	e.Precursor, e.Successor = nil, nil
-	e.Status.Enabled = true
+// Init initialize the edge all fields.
+func (edge *Edge) Init() *Edge {
+	edge.ID = uuid.New().String()
 
-	return e
+	edge.Precursor, edge.Successor = nil, nil
+	edge.Status.Enabled = true
+	edge.Cost = 0
+
+	return edge
 }
