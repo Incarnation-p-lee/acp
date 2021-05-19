@@ -24,7 +24,7 @@ func New() *Edge {
 	return new(Edge).Init()
 }
 
-// Initialize the edge all fields.
+// Init initialize the edge all fields.
 func (edge *Edge) Init() *Edge {
 	edge.ID = uuid.New().String()
 
