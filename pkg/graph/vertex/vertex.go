@@ -19,15 +19,18 @@ type Vertex struct {
 	Status        Status
 }
 
-// New create one vertex and return the pointer to it
-func New(value interface{}) *Vertex {
-	v := new(Vertex)
+// New create one vertex and initialize it
+func New() *Vertex {
+	return new(Vertex).Init()
+}
 
-	v.ID = uuid.New().String()
-	v.AdjacencyList = list.New()
-	v.Status.Visitd = false
+// Initialize all fields of vertex
+func (vertex *Vertex) Init() *Vertex {
+	vertex.ID = uuid.New().String()
 
-	v.Value = value
+	vertex.AdjacencyList = list.New()
+	vertex.Status.Visitd = false
+	vertex.Value = nil
 
-	return v
+	return vertex
 }

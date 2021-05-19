@@ -8,19 +8,37 @@ import (
 )
 
 func TestVertexNew(t *testing.T) {
-	s := "fake-string"
-	v := New(s)
+	v := New()
 
 	assert.NotNil(t, v)
-	assert.NotNil(t, v.AdjacencyList)
-
 	assert.NotNil(t, v.ID)
-	assert.Equal(t, v.Value, s)
-	assert.False(t, v.Status.Visitd)
 
+	assert.NotNil(t, v.AdjacencyList)
 	assert.Equal(t, v.AdjacencyList.Len(), 0)
 
-	id := New(s).ID
+	assert.Nil(t, v.Value)
+	assert.False(t, v.Status.Visitd)
 
-	assert.NotEqual(t, v.ID, id)
+	assert.NotEqual(t, v.ID, New().ID)
+}
+
+func TestVertexInit(t *testing.T) {
+	v := New()
+	v1 := New()
+
+	v.AdjacencyList.PushBack(v1)
+	v.Value = "test-string"
+	v.Status.Visitd = true
+
+	id := v.ID
+
+	v.Init()
+
+	assert.Nil(t, v.Value)
+
+	assert.NotNil(t, v.AdjacencyList)
+	assert.Equal(t, v.AdjacencyList.Len(), 0)
+
+	assert.False(t, v.Status.Visitd)
+	assert.NotEqual(t, id, v.ID)
 }
