@@ -11,7 +11,7 @@ import (
 func TestEdgeNew(t *testing.T) {
 	e := New()
 
-	assert.NotNil(t, e.ID)
+	assert.NotNil(t, e.id)
 
 	assert.Equal(t, e.Cost, int64(0))
 
@@ -20,7 +20,7 @@ func TestEdgeNew(t *testing.T) {
 
 	assert.True(t, e.Status.Enabled)
 
-	assert.NotEqual(t, e.ID, New().ID)
+	assert.NotEqual(t, e.id, New().id)
 }
 
 func TestEdgeInit(t *testing.T) {
@@ -31,7 +31,7 @@ func TestEdgeInit(t *testing.T) {
 	e.Cost = 1234
 	e.Status.Enabled = false
 
-	id := e.ID
+	id := e.id
 
 	e.Init()
 
@@ -41,5 +41,15 @@ func TestEdgeInit(t *testing.T) {
 	assert.Nil(t, e.Successor)
 
 	assert.True(t, e.Status.Enabled)
-	assert.NotEqual(t, id, e.ID)
+	assert.Equal(t, id, e.id)
+}
+
+func TestEdgeSame(t *testing.T) {
+	e := New()
+	e1 := New()
+
+	e.Init()
+
+	assert.True(t, e.IsSame(e))
+	assert.False(t, e.IsSame(e1))
 }
