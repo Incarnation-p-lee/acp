@@ -52,4 +52,5 @@ func TestEdgeSame(t *testing.T) {
 
 	assert.True(t, e.IsSame(e))
 	assert.False(t, e.IsSame(e1))
+	assert.False(t, e.IsSame(nil))
 }
