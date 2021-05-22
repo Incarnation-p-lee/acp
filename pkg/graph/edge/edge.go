@@ -5,32 +5,43 @@ import (
 	"github.com/google/uuid"
 )
 
-// Status indicates the status of edge
+// Status indicates the status of edge.
 type Status struct {
 	Enabled bool
 }
 
-// Edge indicates the structure definition for edge
+// Edge indicates the structure definition for edge.
 type Edge struct {
-	ID        string
+	id        string
 	Cost      int64
 	Precursor *vertex.Vertex
 	Successor *vertex.Vertex
 	Status    Status
 }
 
-// New create one edge and initialize it
+// New create one edge and initialize it.
 func New() *Edge {
 	return new(Edge).Init()
 }
 
 // Init initialize the edge all fields.
-func (edge *Edge) Init() *Edge {
-	edge.ID = uuid.New().String()
+func (e *Edge) Init() *Edge {
+	if e.id == "" {
+		e.id = uuid.New().String()
+	}
 
-	edge.Precursor, edge.Successor = nil, nil
-	edge.Status.Enabled = true
-	edge.Cost = 0
+	e.Precursor, e.Successor = nil, nil
+	e.Status.Enabled = true
+	e.Cost = 0
 
-	return edge
+	return e
+}
+
+// IsSame indicate if the object of edge is same or not.
+func (e *Edge) IsSame(edge *Edge) bool {
+	if edge == nil {
+		return false
+	}
+
+	return e.id == edge.id
 }
