@@ -25,9 +25,8 @@ func TestEdgeNew(t *testing.T) {
 
 func TestEdgeInit(t *testing.T) {
 	e := New()
-	v1, v2 := vertex.New(), vertex.New()
 
-	e.Precursor, e.Successor = v1, v2
+	e.Precursor, e.Successor = vertex.New(), vertex.New()
 	e.Cost = 1234
 	e.Status.Enabled = false
 
@@ -47,8 +46,6 @@ func TestEdgeInit(t *testing.T) {
 func TestEdgeSame(t *testing.T) {
 	e := New()
 	e1 := New()
-
-	e.Init()
 
 	assert.True(t, e.IsSame(e))
 	assert.False(t, e.IsSame(e1))

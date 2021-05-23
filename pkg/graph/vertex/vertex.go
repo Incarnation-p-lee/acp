@@ -13,7 +13,7 @@ type Status struct {
 
 // Vertex indicates the structure definition for vertex.
 type Vertex struct {
-	ID            string
+	id            string
 	AdjacencyList *list.List
 	Value         interface{}
 	Status        Status
@@ -25,12 +25,23 @@ func New() *Vertex {
 }
 
 // Init initialize all fields of vertex.
-func (vertex *Vertex) Init() *Vertex {
-	vertex.ID = uuid.New().String()
+func (v *Vertex) Init() *Vertex {
+	if v.id == "" {
+		v.id = uuid.New().String()
+	}
 
-	vertex.AdjacencyList = list.New()
-	vertex.Status.Visitd = false
-	vertex.Value = nil
+	v.AdjacencyList = list.New()
+	v.Status.Visitd = false
+	v.Value = nil
 
-	return vertex
+	return v
+}
+
+// IsSame indicate if the object of edge is same or not.
+func (v *Vertex) IsSame(vertex *Vertex) bool {
+	if vertex == nil {
+		return false
+	}
+
+	return v.id == vertex.id
 }
